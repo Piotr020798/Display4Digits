@@ -1,15 +1,17 @@
 #include "Display4Digits.h"
 
+
+// Konfiguracja cyfr
 byte digitsPattern[12] =  {		B00111111,   // 0
 								B00000110,   // 1
 								B01011011,   // 2
-								B01010111,   // 3
+								B01001111,   // 3
 								B01100110,   // 4
-								B01110101,   // 5
+								B01101101,   // 5
 								B01111101,   // 6
 								B00000111,   // 7
 								B01111111,   // 8
-								B01110111,   // 9
+								B01101111,   // 9
 								B01000000,	 // -
 								B00000000 }; // nic
 
@@ -37,7 +39,8 @@ Display4Digits::Display4Digits(short pin1, short pin2, short pin3, short pin4, i
 		pinMode(pins[i], OUTPUT);
 	}
 	
-	displayAll0 = true;
+	// Włącza wyświetlanie wszystkich cyfr
+	displayAll0 = true;		
 }
 
 
@@ -71,6 +74,7 @@ void Display4Digits::update(int number)
 		{
 			digits[0] = 10;
 		}
+		// Wyświetlanie cyfr po kropce i 1 przed, gdy wyłączone jest wyświetlanie wszystkich cyfr
 		if(numberCopy >= 0 && !displayAll0)
 		{
 			if(numberCopy < 1000 && !dots[0])
@@ -109,18 +113,18 @@ void Display4Digits::display()
 			if(dots[i])
 				dis ^= byte(10000000);			// Dodawanie kropki, jeśli włączona
 		
-			if(type == HIGH)
+			if(type == HIGH)					// Wspólna anoda
 			{
 				digitalWrite(pins[i], HIGH);    // uruchomienie wybranego wyświetlacza
-				SPI.transfer (~dis);          	// Wysyłanie liczby (wspólna anoda)
+				SPI.transfer (~dis);          	// Wysyłanie liczby
 			}
-			else
+			else								// Wspólna katoda
 			{
 				digitalWrite(pins[i], LOW);    	// uruchomienie wybranego wyświetlacza
-				SPI.transfer (dis);     		// Wysyłanie liczby (wspólna katoda)
+				SPI.transfer (dis);     		// Wysyłanie liczby
 			}
 			
-			delayMicroseconds(1000);
+			delayMicroseconds(1000);			// Czekanie przez 1000 mikrosekund = 1 milisekunde
 	}
 }
 

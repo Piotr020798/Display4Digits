@@ -1,15 +1,15 @@
 /********************************************************************************************
-*	Display4Digits - klasa do obsługi wyświetlacza 7 - segmentowego 4 cyfrowego				*
-*	Autor: Piotr Kowalczyk																	*
-*	Wersja: 1.0																				*
-*																							*
-* 	Zezwalam na rozpowszechnianie i edycję z zachowaniem informacji o pierwszym autorze 	*																*
+*   Display4Digits - klasa do obsługi wyświetlacza 7 - segmentowego 4 cyfrowego             *
+*   Autor: Piotr Kowalczyk                                                                  *
+*   Wersja: 1.0                                                                             *
+*                                                                                           *
+*   Zezwalam na rozpowszechnianie i edycję z zachowaniem informacji o pierwszym autorze     *																*
 *********************************************************************************************
-*	Changelog:																				*
-*	[23-01-2015] v1.0 - Pierwsze wydanie													*
+*   Changelog:                                                                              *
+*   [23-01-2015] v1.0 - Pierwsze wydanie                                                    *
 *********************************************************************************************
-*	Znane błędy:																			*
-*	- Nie działa naraz z innymi urządzeniami podłączonymi pod SPI							*
+*   Znane błędy:                                                                            *
+*   - Nie działa naraz z innymi urządzeniami podłączonymi pod SPI                           *
 ********************************************************************************************/
 
 
@@ -43,11 +43,11 @@ private:
 public:
 	
 	/****************************************************************************************************************
-	*												Konstruktor														*
-	*	parametry:																									*
-	*		pin1-pin4 	- kolejne piny cyfr wyświetlacza od lewej													*
-	*		type		- typ wyświetlacza. wspólna anoda - HIGH, wspólna katoda - LOW								*
-	*		CS			- port Chip Select (Slave Select). http://arduino.cc/en/Reference/SPI (tabela Connections)	*
+	*                                              Konstruktor                                                      *
+	*   parametry:                                                                                                  *
+	*       pin1-pin4 	- kolejne piny cyfr wyświetlacza od lewej                                                   *
+	*       type		- typ wyświetlacza. wspólna anoda - HIGH, wspólna katoda - LOW                              *
+	*       CS			- port Chip Select (Slave Select). http://arduino.cc/en/Reference/SPI (tabela Connections)  *
 	****************************************************************************************************************/
 	Display4Digits(short pin1, short pin2, short pin3, short pin4, int type, int CS);
 	/***************************************************************************************************************/
