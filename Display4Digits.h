@@ -1,28 +1,33 @@
 /********************************************************************************************
 *   Display4Digits - klasa do obsługi wyświetlacza 7 - segmentowego 4 cyfrowego             *
 *   Autor: Piotr Kowalczyk                                                                  *
-*   Wersja: 1.0                                                                             *
+*   Wersja: 1.1                                                                             *
 *                                                                                           *
 *   Zezwalam na rozpowszechnianie i edycję z zachowaniem informacji o pierwszym autorze     *																*
 *********************************************************************************************
 *   Changelog:                                                                              *
 *   [23-01-2015] v1.0 - Pierwsze wydanie                                                    *
-*********************************************************************************************
-*   Znane błędy:                                                                            *
-*   - Nie działa naraz z innymi urządzeniami podłączonymi pod SPI                           *
+*   [03-02-2015] v1.1:                                                                      *
+*       - możliwość wyłączenia poszczególnych cyfr -disable() & enable()                    *
+*       - możliwość włączenia migania cyfr -setFlash()                                      *
+*       - poprawki błędów                                                                   *
 ********************************************************************************************/
 
 
 #ifndef Display4Digits_h
-#define Display4Digits_H
+#define Display4Digits_h
 
 #include "Arduino.h"
 #include <SPI.h>
+#include <Timer.h>
 
 
 class Display4Digits
 {
 private:
+	// Wyświetlana liczba (cała)
+	int number;
+
 	// Cyfry do wyświetlenia
 	int digits[4];
 	
@@ -40,6 +45,16 @@ private:
 	
 	// Czy wyświetlać wszystkie zera
 	bool displayAll0;
+	
+	// Wyłączone cyfry
+	bool disabled[4];
+	
+	// Miganie cyfr
+	bool flashing[4];
+	
+	// Timery dla cyfr
+	Timer timer[4];
+
 public:
 	
 	/****************************************************************************************************************
@@ -64,6 +79,18 @@ public:
 	// Funkcja ustawiająca wyświetlanie wszystkich zer np. gdy mamy liczbę 10, przy włączeniu(domyślnie) będzie wyświetlać się 0010. Przyjmuje parametry true/false (włączone/wyłączone)
 	// UWAGA! Jeśli opcja ta jest wyłączona, a kropka jest włączona, to automatycznie będą wyświetlane zera po kropce i jedno przed.
 	void displayAll0Digits(bool enable);
+	
+	// Wyłącza wyświetlanie wybranej cyfry
+	void disable(int digit);
+	
+	// Włącza wyświetlanie wybranej cyfry
+	void enable(int digit);
+	
+	// Zwraca wyświetlaną wartość
+	int get();
+	
+	// Ustawia miganie cyfry
+	void setFlash(int digit, bool enable);
 };
 
 #endif
